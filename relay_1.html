@@ -103,6 +103,13 @@
   .legend{ font-size:11px; color:var(--mid); display:flex; gap:14px; flex-wrap:wrap; }
   .legend span{ display:inline-flex; align-items:center; gap:5px; }
   .swatch{ width:10px; height:10px; border-radius:50%; border:2px solid var(--black); display:inline-block; }
+
+  .algo-card .algo-steps{
+    margin:0; padding-left:18px; display:flex; flex-direction:column; gap:10px;
+  }
+  .algo-card .algo-steps li{ font-size:12px; line-height:1.55; color:var(--dark); }
+  .algo-card .algo-steps b{ color:var(--black); }
+  .algo-card .algo-steps i{ font-style:normal; text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:2px; }
 </style>
 </head>
 <body>
@@ -137,6 +144,16 @@
           <span><i class="swatch" style="background:#fff"></i> destination</span>
           <span>number below node = reliability %</span>
         </div>
+      </div>
+
+      <div class="card algo-card">
+        <h2>How routing works</h2>
+        <ol class="algo-steps">
+          <li><b>Map the mesh.</b> Nodes within range of each other are linked, the same way phones would discover each other over Bluetooth or Wi-Fi Direct.</li>
+          <li><b>List the candidate routes.</b> Every reasonable path between source and destination is traced, up to 6 hops.</li>
+          <li><b>Score by reliability, not distance.</b> Each path is scored by the <i>average reliability</i> of the nodes it passes through — a longer path through solid devices can beat a short path through a flaky one.</li>
+          <li><b>Send along the best-scoring path.</b> Ties go to whichever route has fewer hops.</li>
+        </ol>
       </div>
 
       <div class="card">
