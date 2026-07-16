@@ -8,125 +8,324 @@
   :root{
     --black:#0a0a0a;
     --white:#ffffff;
-    --line:#d8d8d8;
-    --mid:#9a9a9a;
+    --line:#dcdcdc;
+    --line-soft:#ececec;
+    --mid:#8f8f8f;
+    --ink:#3a3a3a;
   }
   *{ box-sizing:border-box; }
   html,body{
-    margin:0; height:100%;
+    margin:0; padding:0;
     background:var(--white); color:var(--black);
     font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;
     -webkit-font-smoothing:antialiased;
   }
   .mono{ font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace; }
+  a{ color:inherit; }
 
-  .wrap{
-    min-height:100%; display:flex; flex-direction:column;
-    max-width:720px; margin:0 auto; padding:64px 24px 40px;
-  }
+  .shell{ max-width:1040px; margin:0 auto; padding:0 24px; }
 
-  /* faint mesh backdrop, purely decorative */
-  .backdrop{
-    position:fixed; inset:0; z-index:-1; overflow:hidden;
+  /* ---------------- nav ---------------- */
+  nav{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:26px 0; border-bottom:1px solid var(--line);
   }
-  .backdrop svg{ width:100%; height:100%; }
-  .backdrop line{ stroke:var(--line); stroke-width:1; }
-  .backdrop circle{ fill:var(--white); stroke:var(--black); stroke-width:1.5; }
+  .mark{ font-weight:800; font-size:15px; letter-spacing:3px; }
+  .mark span{ color:var(--mid); font-weight:400; letter-spacing:1px; margin-left:8px; }
+  .navlink{
+    font-size:12px; letter-spacing:0.5px; text-decoration:none;
+    border:1px solid var(--black); padding:8px 16px;
+    transition:background .15s, color .15s;
+  }
+  .navlink:hover{ background:var(--black); color:var(--white); }
+
+  /* ---------------- hero ---------------- */
+  .hero{
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:48px;
+    align-items:center; padding:72px 0 60px;
+  }
+  @media (max-width:860px){ .hero{ grid-template-columns:1fr; padding:48px 0 40px; } }
 
   .eyebrow{
-    font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--mid);
-    margin-bottom:14px;
+    font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--mid);
+    margin:0 0 18px; display:flex; align-items:center; gap:8px;
   }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--black); display:inline-block; }
+
   h1{
-    font-size:44px; letter-spacing:1px; margin:0 0 6px; font-weight:800; line-height:1.05;
+    font-size:clamp(40px, 6vw, 60px); line-height:0.98; letter-spacing:-0.5px;
+    margin:0 0 20px; font-weight:800;
   }
-  .sub{
-    font-size:15px; color:#444; max-width:480px; line-height:1.6; margin:0 0 36px;
+  .lede{
+    font-size:16px; line-height:1.65; color:var(--ink); max-width:440px; margin:0 0 32px;
   }
 
-  .details{ border-top:1px solid var(--black); padding-top:20px; margin-bottom:36px; }
-  .details dl{ display:grid; grid-template-columns:120px 1fr; row-gap:12px; column-gap:16px; margin:0; }
-  .details dt{ font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--mid); }
-  .details dd{ margin:0; font-size:13.5px; }
-
+  .actions{ display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
   .cta{
     display:inline-flex; align-items:center; gap:10px;
     background:var(--black); color:var(--white);
-    padding:14px 22px; text-decoration:none;
-    font-weight:700; font-size:13px; letter-spacing:1px; text-transform:uppercase;
-    width:fit-content; transition:transform .15s ease;
+    padding:15px 24px; text-decoration:none;
+    font-weight:700; font-size:12.5px; letter-spacing:1.2px; text-transform:uppercase;
+    transition:letter-spacing .18s ease, padding .18s ease;
   }
-  .cta:hover{ transform:translateX(2px); }
-  .cta .arrow{ transition:transform .15s ease; }
-  .cta:hover .arrow{ transform:translateX(3px); }
+  .cta:hover{ letter-spacing:1.8px; }
+  .cta .arrow{ font-size:14px; }
+  .cta-note{ font-size:12px; color:var(--mid); }
+
+  /* ---------------- hero visual: live mini mesh ---------------- */
+  .hero-visual{
+    position:relative; aspect-ratio:1/1; border:1px solid var(--black);
+    background:
+      linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0/32px 32px,
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0/32px 32px;
+  }
+  .hero-visual svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .hv-edge{ stroke:var(--line); stroke-width:1.2; }
+  .hv-edge.on{ stroke:var(--black); stroke-width:1.6; }
+  .hv-node{ fill:var(--white); stroke:var(--black); stroke-width:2; }
+  .hv-node.active{ fill:var(--black); }
+  .hv-dot{ fill:var(--black); }
+  .hv-glow{ fill:none; stroke:var(--black); stroke-width:1; opacity:0.3; }
+  .hv-caption{
+    position:absolute; left:14px; bottom:12px; font-size:10.5px; letter-spacing:1px;
+    text-transform:uppercase; color:var(--mid);
+  }
+
+  /* ---------------- how it works strip ---------------- */
+  .section{ padding:56px 0; border-top:1px solid var(--black); }
+  .section h2{
+    font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--mid);
+    margin:0 0 32px;
+  }
+  .steps{ display:grid; grid-template-columns:repeat(3, 1fr); gap:0; }
+  @media (max-width:860px){ .steps{ grid-template-columns:1fr; } }
+  .step{
+    padding:0 28px 0 0; border-right:1px solid var(--line);
+  }
+  .step:last-child{ border-right:none; }
+  @media (max-width:860px){
+    .step{ border-right:none; border-bottom:1px solid var(--line); padding:0 0 24px; margin-bottom:24px; }
+    .step:last-child{ border-bottom:none; margin-bottom:0; }
+  }
+  .step-num{ font-size:12px; color:var(--mid); margin-bottom:12px; }
+  .step h3{ font-size:16px; margin:0 0 10px; font-weight:700; }
+  .step p{ font-size:13.5px; line-height:1.6; color:var(--ink); margin:0; }
+
+  /* ---------------- facts row ---------------- */
+  .facts{
+    display:grid; grid-template-columns:repeat(3, 1fr); border-top:1px solid var(--black);
+    border-bottom:1px solid var(--black);
+  }
+  @media (max-width:860px){ .facts{ grid-template-columns:1fr; } }
+  .fact{ padding:24px 28px; border-right:1px solid var(--line); }
+  .fact:last-child{ border-right:none; }
+  @media (max-width:860px){ .fact{ border-right:none; border-bottom:1px solid var(--line); } .fact:last-child{ border-bottom:none; } }
+  .fact dt{ font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--mid); margin-bottom:8px; }
+  .fact dd{ margin:0; font-size:14px; }
 
   footer{
-    margin-top:auto; padding-top:48px; font-size:11.5px; color:var(--mid);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:28px 0 48px; font-size:11.5px; color:var(--mid);
   }
 </style>
 </head>
 <body>
+<div class="shell">
 
-<div class="backdrop" id="backdrop"><svg id="bgsvg"></svg></div>
+  <nav>
+    <div class="mark">RELAY <span>mesh network simulator</span></div>
+    <a class="navlink" href="relay.html">Launch →</a>
+  </nav>
 
-<div class="wrap">
-  <div class="eyebrow">Offline messaging · simulation</div>
-  <h1>RELAY</h1>
-  <p class="sub">
-    A visual simulation of a mesh messaging network — the kind of
-    phone-to-phone relay you'd need when cell towers and internet are
-    down. Messages hop node to node, routed toward whichever path is
-    most reliable, not just shortest.
-  </p>
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Offline messaging · simulation</p>
+      <h1>Messages find<br>their own way.</h1>
+      <p class="lede">
+        A visual simulation of a mesh network for when phones and the
+        internet are down. Every message hops from device to device,
+        routed toward whichever chain of nodes is most reliable —
+        not just whichever is shortest.
+      </p>
+      <div class="actions">
+        <a class="cta" href="relay.html">Launch simulator <span class="arrow">→</span></a>
+        <span class="cta-note">No install · runs in your browser</span>
+      </div>
+    </div>
 
-  <div class="details">
-    <dl>
+    <div class="hero-visual" id="heroVisual">
+      <svg id="hvSvg" viewBox="0 0 300 300"></svg>
+      <div class="hv-caption mono">live preview — auto-routing</div>
+    </div>
+  </div>
+
+  <div class="facts">
+    <dl class="fact">
       <dt>Nodes</dt>
-      <dd class="mono">9 devices, randomized on load</dd>
+      <dd class="mono">9 devices, randomized each load</dd>
+    </dl>
+    <dl class="fact">
       <dt>Routing</dt>
-      <dd>Highest average reliability wins, not shortest hop count</dd>
+      <dd>Highest average reliability, not shortest hop count</dd>
+    </dl>
+    <dl class="fact">
       <dt>Stack</dt>
-      <dd class="mono">Plain HTML / CSS / JS — no backend, no dependencies</dd>
+      <dd class="mono">HTML / CSS / JS — no backend, no libraries</dd>
     </dl>
   </div>
 
-  <a class="cta" href="relay.html">
-    Launch simulator <span class="arrow">→</span>
-  </a>
+  <div class="section">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num mono">01</div>
+        <h3>Devices scatter and link up</h3>
+        <p>Nodes are placed at random and connected to whichever others sit within radio range — just like phones discovering each other over Bluetooth or Wi-Fi Direct.</p>
+      </div>
+      <div class="step">
+        <div class="step-num mono">02</div>
+        <h3>Every path is weighed</h3>
+        <p>Rather than taking the shortest route, the simulator compares every reasonable path and scores each one by the average reliability of the devices along it.</p>
+      </div>
+      <div class="step">
+        <div class="step-num mono">03</div>
+        <h3>The message hops through</h3>
+        <p>The most trustworthy path wins. The message travels hop by hop, slowing down slightly at weaker devices, until it reaches its destination.</p>
+      </div>
+    </div>
+  </div>
 
-  <footer>Runs entirely in your browser. No data leaves the page.</footer>
+  <footer>
+    <span>No data leaves the page. Nothing is stored.</span>
+    <span class="mono">relay.html</span>
+  </footer>
+
 </div>
 
 <script>
-  // Purely decorative faint mesh drawn behind the content — a quiet
-  // nod to the actual simulator without competing with it.
-  const svg = document.getElementById("bgsvg");
-  const W = 1200, H = 800;
-  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-  svg.setAttribute("preserveAspectRatio", "xMidYMid slice");
+/* ---------------------------------------------------------------------
+   Live hero preview — a small looping demo of the real routing logic.
+   Not the full app, just enough motion to show what it does.
+   --------------------------------------------------------------------- */
+const svg = document.getElementById("hvSvg");
+const W = 300, H = 300;
 
-  const pts = [];
-  for(let i = 0; i < 14; i++){
-    pts.push({ x: Math.random()*W, y: Math.random()*H });
+// A handful of fixed nodes laid out to look intentional, each with
+// its own reliability so the "best path" genuinely varies.
+const demoNodes = [
+  { x: 40,  y: 60,  r: 88 },
+  { x: 140, y: 30,  r: 54 },
+  { x: 240, y: 70,  r: 91 },
+  { x: 60,  y: 170, r: 40 },
+  { x: 155, y: 150, r: 77 },
+  { x: 250, y: 190, r: 65 },
+  { x: 100, y: 250, r: 95 },
+  { x: 220, y: 260, r: 58 },
+];
+
+const RANGE = 130;
+const edges = [];
+for(let i=0;i<demoNodes.length;i++){
+  for(let j=i+1;j<demoNodes.length;j++){
+    const d = Math.hypot(demoNodes[i].x-demoNodes[j].x, demoNodes[i].y-demoNodes[j].y);
+    if(d < RANGE) edges.push([i,j]);
   }
-  pts.forEach((p, i) => {
-    pts.forEach((q, j) => {
-      if(j <= i) return;
-      const d = Math.hypot(p.x-q.x, p.y-q.y);
-      if(d < 260){
-        const line = document.createElementNS("http://www.w3.org/2000/svg","line");
-        line.setAttribute("x1", p.x); line.setAttribute("y1", p.y);
-        line.setAttribute("x2", q.x); line.setAttribute("y2", q.y);
-        svg.appendChild(line);
-      }
-    });
-  });
-  pts.forEach(p => {
-    const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
-    c.setAttribute("cx", p.x); c.setAttribute("cy", p.y); c.setAttribute("r", 4);
-    svg.appendChild(c);
-  });
-</script>
+}
+const adj = demoNodes.map(()=>[]);
+edges.forEach(([a,b])=>{ adj[a].push(b); adj[b].push(a); });
 
+edges.forEach(([a,b])=>{
+  const l = document.createElementNS("http://www.w3.org/2000/svg","line");
+  l.setAttribute("x1", demoNodes[a].x); l.setAttribute("y1", demoNodes[a].y);
+  l.setAttribute("x2", demoNodes[b].x); l.setAttribute("y2", demoNodes[b].y);
+  l.setAttribute("class","hv-edge");
+  l.dataset.a = a; l.dataset.b = b;
+  svg.appendChild(l);
+});
+demoNodes.forEach((n,i)=>{
+  const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+  c.setAttribute("cx", n.x); c.setAttribute("cy", n.y); c.setAttribute("r", 7);
+  c.setAttribute("class","hv-node");
+  c.dataset.id = i;
+  svg.appendChild(c);
+});
+
+function bestPath(src, dst){
+  let best = null;
+  function dfs(cur, visited, path){
+    if(cur === dst){
+      const avg = path.reduce((s,id)=>s+demoNodes[id].r,0)/path.length;
+      if(!best || avg > best.avg) best = { path:[...path], avg };
+      return;
+    }
+    if(path.length > 5) return;
+    for(const next of adj[cur]){
+      if(!visited.has(next)){
+        visited.add(next); path.push(next);
+        dfs(next, visited, path);
+        path.pop(); visited.delete(next);
+      }
+    }
+  }
+  dfs(src, new Set([src]), [src]);
+  return best;
+}
+
+function nodeEl(i){ return svg.querySelector(`.hv-node[data-id="${i}"]`); }
+function edgeEl(a,b){
+  return [...svg.querySelectorAll(".hv-edge")].find(l =>
+    (+l.dataset.a===a && +l.dataset.b===b) || (+l.dataset.a===b && +l.dataset.b===a));
+}
+
+let dot=null, glow=null;
+function runDemo(){
+  const src = Math.floor(Math.random()*demoNodes.length);
+  let dst = Math.floor(Math.random()*demoNodes.length);
+  while(dst === src) dst = Math.floor(Math.random()*demoNodes.length);
+  const result = bestPath(src, dst);
+  if(!result){ setTimeout(runDemo, 800); return; }
+
+  svg.querySelectorAll(".hv-edge").forEach(l=>l.classList.remove("on"));
+  svg.querySelectorAll(".hv-node").forEach(n=>n.classList.remove("active"));
+  for(let i=0;i<result.path.length-1;i++){
+    const e = edgeEl(result.path[i], result.path[i+1]);
+    if(e) e.classList.add("on");
+  }
+
+  dot = document.createElementNS("http://www.w3.org/2000/svg","circle");
+  dot.setAttribute("r",4.5); dot.setAttribute("class","hv-dot");
+  glow = document.createElementNS("http://www.w3.org/2000/svg","circle");
+  glow.setAttribute("r",8); glow.setAttribute("class","hv-glow");
+  svg.appendChild(glow); svg.appendChild(dot);
+
+  let hop = 0;
+  function hopStep(){
+    if(hop >= result.path.length-1){
+      svg.removeChild(dot); svg.removeChild(glow);
+      setTimeout(runDemo, 1100);
+      return;
+    }
+    const from = demoNodes[result.path[hop]], to = demoNodes[result.path[hop+1]];
+    nodeEl(result.path[hop]).classList.add("active");
+    const duration = 500 + (100-to.r)*4;
+    const start = performance.now();
+    function frame(now){
+      const t = Math.min(1,(now-start)/duration);
+      const x = from.x+(to.x-from.x)*t, y = from.y+(to.y-from.y)*t;
+      dot.setAttribute("cx",x); dot.setAttribute("cy",y);
+      glow.setAttribute("cx",x); glow.setAttribute("cy",y);
+      if(t<1) requestAnimationFrame(frame);
+      else{
+        nodeEl(result.path[hop+1]).classList.add("active");
+        hop++;
+        setTimeout(hopStep, 120);
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  hopStep();
+}
+runDemo();
+</script>
 </body>
 </html>
