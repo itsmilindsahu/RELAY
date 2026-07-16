@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relay — Mesh Network Simulator</title>
+<style>
+  :root{
+    --black:#0a0a0a;
+    --white:#ffffff;
+    --line:#d8d8d8;
+    --mid:#9a9a9a;
+  }
+  *{ box-sizing:border-box; }
+  html,body{
+    margin:0; height:100%;
+    background:var(--white); color:var(--black);
+    font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace; }
+
+  .wrap{
+    min-height:100%; display:flex; flex-direction:column;
+    max-width:720px; margin:0 auto; padding:64px 24px 40px;
+  }
+
+  /* faint mesh backdrop, purely decorative */
+  .backdrop{
+    position:fixed; inset:0; z-index:-1; overflow:hidden;
+  }
+  .backdrop svg{ width:100%; height:100%; }
+  .backdrop line{ stroke:var(--line); stroke-width:1; }
+  .backdrop circle{ fill:var(--white); stroke:var(--black); stroke-width:1.5; }
+
+  .eyebrow{
+    font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--mid);
+    margin-bottom:14px;
+  }
+  h1{
+    font-size:44px; letter-spacing:1px; margin:0 0 6px; font-weight:800; line-height:1.05;
+  }
+  .sub{
+    font-size:15px; color:#444; max-width:480px; line-height:1.6; margin:0 0 36px;
+  }
+
+  .details{ border-top:1px solid var(--black); padding-top:20px; margin-bottom:36px; }
+  .details dl{ display:grid; grid-template-columns:120px 1fr; row-gap:12px; column-gap:16px; margin:0; }
+  .details dt{ font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--mid); }
+  .details dd{ margin:0; font-size:13.5px; }
+
+  .cta{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--black); color:var(--white);
+    padding:14px 22px; text-decoration:none;
+    font-weight:700; font-size:13px; letter-spacing:1px; text-transform:uppercase;
+    width:fit-content; transition:transform .15s ease;
+  }
+  .cta:hover{ transform:translateX(2px); }
+  .cta .arrow{ transition:transform .15s ease; }
+  .cta:hover .arrow{ transform:translateX(3px); }
+
+  footer{
+    margin-top:auto; padding-top:48px; font-size:11.5px; color:var(--mid);
+  }
+</style>
+</head>
+<body>
+
+<div class="backdrop" id="backdrop"><svg id="bgsvg"></svg></div>
+
+<div class="wrap">
+  <div class="eyebrow">Offline messaging · simulation</div>
+  <h1>RELAY</h1>
+  <p class="sub">
+    A visual simulation of a mesh messaging network — the kind of
+    phone-to-phone relay you'd need when cell towers and internet are
+    down. Messages hop node to node, routed toward whichever path is
+    most reliable, not just shortest.
+  </p>
+
+  <div class="details">
+    <dl>
+      <dt>Nodes</dt>
+      <dd class="mono">9 devices, randomized on load</dd>
+      <dt>Routing</dt>
+      <dd>Highest average reliability wins, not shortest hop count</dd>
+      <dt>Stack</dt>
+      <dd class="mono">Plain HTML / CSS / JS — no backend, no dependencies</dd>
+    </dl>
+  </div>
+
+  <a class="cta" href="relay.html">
+    Launch simulator <span class="arrow">→</span>
+  </a>
+
+  <footer>Runs entirely in your browser. No data leaves the page.</footer>
+</div>
+
+<script>
+  // Purely decorative faint mesh drawn behind the content — a quiet
+  // nod to the actual simulator without competing with it.
+  const svg = document.getElementById("bgsvg");
+  const W = 1200, H = 800;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  svg.setAttribute("preserveAspectRatio", "xMidYMid slice");
+
+  const pts = [];
+  for(let i = 0; i < 14; i++){
+    pts.push({ x: Math.random()*W, y: Math.random()*H });
+  }
+  pts.forEach((p, i) => {
+    pts.forEach((q, j) => {
+      if(j <= i) return;
+      const d = Math.hypot(p.x-q.x, p.y-q.y);
+      if(d < 260){
+        const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+        line.setAttribute("x1", p.x); line.setAttribute("y1", p.y);
+        line.setAttribute("x2", q.x); line.setAttribute("y2", q.y);
+        svg.appendChild(line);
+      }
+    });
+  });
+  pts.forEach(p => {
+    const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    c.setAttribute("cx", p.x); c.setAttribute("cy", p.y); c.setAttribute("r", 4);
+    svg.appendChild(c);
+  });
+</script>
+
+</body>
+</html>
