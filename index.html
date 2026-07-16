@@ -12,6 +12,7 @@
     --line-soft:#ececec;
     --mid:#8f8f8f;
     --ink:#3a3a3a;
+    --paper:#fafaf9;
   }
   *{ box-sizing:border-box; }
   html,body{
@@ -32,12 +33,15 @@
   }
   .mark{ font-weight:800; font-size:15px; letter-spacing:3px; }
   .mark span{ color:var(--mid); font-weight:400; letter-spacing:1px; margin-left:8px; }
+  .navlinks{ display:flex; align-items:center; gap:14px; }
   .navlink{
     font-size:12px; letter-spacing:0.5px; text-decoration:none;
     border:1px solid var(--black); padding:8px 16px;
     transition:background .15s, color .15s;
   }
   .navlink:hover{ background:var(--black); color:var(--white); }
+  .navlink.ghost{ border-color:var(--line); color:var(--mid); }
+  .navlink.ghost:hover{ background:var(--black); border-color:var(--black); color:var(--white); }
 
   /* ---------------- hero ---------------- */
   .hero{
@@ -91,26 +95,6 @@
     text-transform:uppercase; color:var(--mid);
   }
 
-  /* ---------------- how it works strip ---------------- */
-  .section{ padding:56px 0; border-top:1px solid var(--black); }
-  .section h2{
-    font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--mid);
-    margin:0 0 32px;
-  }
-  .steps{ display:grid; grid-template-columns:repeat(3, 1fr); gap:0; }
-  @media (max-width:860px){ .steps{ grid-template-columns:1fr; } }
-  .step{
-    padding:0 28px 0 0; border-right:1px solid var(--line);
-  }
-  .step:last-child{ border-right:none; }
-  @media (max-width:860px){
-    .step{ border-right:none; border-bottom:1px solid var(--line); padding:0 0 24px; margin-bottom:24px; }
-    .step:last-child{ border-bottom:none; margin-bottom:0; }
-  }
-  .step-num{ font-size:12px; color:var(--mid); margin-bottom:12px; }
-  .step h3{ font-size:16px; margin:0 0 10px; font-weight:700; }
-  .step p{ font-size:13.5px; line-height:1.6; color:var(--ink); margin:0; }
-
   /* ---------------- facts row ---------------- */
   .facts{
     display:grid; grid-template-columns:repeat(3, 1fr); border-top:1px solid var(--black);
@@ -123,10 +107,104 @@
   .fact dt{ font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--mid); margin-bottom:8px; }
   .fact dd{ margin:0; font-size:14px; }
 
+  /* ---------------- mathematics mega-section ---------------- */
+  .math-section{ padding:56px 0 0; border-top:1px solid var(--black); }
+  .math-section > .math-intro{ padding-bottom:40px; }
+  .math-section h2{
+    font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--mid);
+    margin:0 0 18px;
+  }
+  .math-title{
+    font-size:clamp(26px, 3.4vw, 34px); font-weight:800; letter-spacing:-0.3px;
+    margin:0 0 16px; line-height:1.1;
+  }
+  .math-dek{ font-size:15px; line-height:1.7; color:var(--ink); max-width:640px; margin:0 0 28px; }
+
+  .toc{ display:flex; flex-wrap:wrap; gap:10px; padding-bottom:8px; }
+  .toc a{
+    font-size:11.5px; letter-spacing:0.3px; text-decoration:none; color:var(--ink);
+    border:1px solid var(--line); padding:8px 14px; white-space:nowrap;
+    transition:border-color .15s, color .15s;
+  }
+  .toc a:hover{ border-color:var(--black); color:var(--black); }
+  .toc a .n{ color:var(--mid); margin-right:6px; }
+
+  .sub{ padding:48px 0; border-top:1px solid var(--line); scroll-margin-top:24px; }
+  .sub-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:22px; }
+  .sub-num{ font-size:13px; color:var(--mid); flex:none; }
+  .sub-name{ font-size:20px; font-weight:700; letter-spacing:-0.2px; }
+
+  .split{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:42px; align-items:start; }
+  @media (max-width:860px){ .split{ grid-template-columns:1fr; } }
+  .split.rev{ grid-template-columns:0.95fr 1.05fr; }
+  @media (max-width:860px){ .split.rev{ grid-template-columns:1fr; } }
+  .split.rev .prose{ order:2; } .split.rev .visual{ order:1; }
+  @media (max-width:860px){ .split.rev .prose{ order:1; } .split.rev .visual{ order:2; } }
+
+  .prose p{ font-size:14.5px; line-height:1.72; color:var(--ink); margin:0 0 14px; }
+  .prose p:last-child{ margin-bottom:0; }
+  .prose strong{ color:var(--black); }
+
+  .eq{
+    border:1px solid var(--black); background:var(--paper); padding:18px 20px;
+    margin:16px 0; font-size:14px; line-height:1.9; overflow-x:auto;
+  }
+  .eq .eq-label{
+    display:block; font-size:9.5px; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--mid); margin-bottom:8px; font-family:-apple-system,Arial,sans-serif;
+  }
+
+  .aside{
+    border-left:2px solid var(--black); padding:14px 0 14px 18px; margin:18px 0;
+    background:var(--line-soft);
+  }
+  .aside p{ font-size:13.5px; line-height:1.68; color:var(--ink); margin:0 0 10px; }
+  .aside p:last-child{ margin-bottom:0; }
+  .aside .aside-tag{
+    font-size:10px; letter-spacing:1.3px; text-transform:uppercase; color:var(--mid);
+    display:block; margin-bottom:8px;
+  }
+
+  .visual{
+    border:1px solid var(--black); padding:14px; background:var(--white);
+  }
+  .visual svg{ display:block; width:100%; height:auto; }
+  .visual figcaption{
+    font-size:11px; color:var(--mid); margin-top:10px; line-height:1.5;
+  }
+  .d-node{ fill:var(--white); stroke:var(--black); stroke-width:1.8; }
+  .d-node.win{ fill:var(--black); }
+  .d-edge{ stroke:var(--black); stroke-width:1.4; }
+  .d-edge.soft{ stroke:var(--line); }
+  .d-edge.mid{ stroke:var(--mid); }
+  .d-edge.dashed{ stroke-dasharray:4 3; }
+  .d-label{ font:10.5px "SFMono-Regular",Consolas,monospace; fill:var(--ink); }
+  .d-label.mid{ fill:var(--mid); }
+  .d-label.win{ fill:var(--black); font-weight:700; }
+  .d-tag{ font:9.5px -apple-system,Arial,sans-serif; letter-spacing:0.5px; }
+
+  table.worked{ width:100%; border-collapse:collapse; margin:16px 0; font-size:13px; }
+  table.worked th, table.worked td{
+    text-align:left; padding:9px 10px; border-bottom:1px solid var(--line);
+  }
+  table.worked th{
+    font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--mid);
+    border-bottom:1px solid var(--black); font-weight:600;
+  }
+  table.worked td.num{ font-family:"SFMono-Regular",Consolas,monospace; }
+  table.worked tr.win td{ font-weight:700; }
+  .pill{
+    display:inline-block; font-size:10px; letter-spacing:0.6px; text-transform:uppercase;
+    padding:3px 8px; border:1px solid var(--black);
+  }
+  .pill.off{ border-color:var(--line); color:var(--mid); }
+
   footer{
     display:flex; justify-content:space-between; align-items:center;
-    padding:28px 0 48px; font-size:11.5px; color:var(--mid);
+    padding:28px 0 48px; font-size:11.5px; color:var(--mid); flex-wrap:wrap; gap:12px;
+    border-top:1px solid var(--line); margin-top:8px;
   }
+  footer a{ text-decoration:underline; text-underline-offset:2px; }
 </style>
 </head>
 <body>
@@ -134,7 +212,10 @@
 
   <nav>
     <div class="mark">RELAY <span>mesh network simulator</span></div>
-    <a class="navlink" href="relay.html">Launch →</a>
+    <div class="navlinks">
+      <a class="navlink ghost" href="https://github.com/itsmilindsahu/RELAY" target="_blank" rel="noopener">Source</a>
+      <a class="navlink" href="relay.html">Launch →</a>
+    </div>
   </nav>
 
   <div class="hero">
@@ -174,30 +255,368 @@
     </dl>
   </div>
 
-  <div class="section">
-    <h2>How it works</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num mono">01</div>
-        <h3>Devices scatter and link up</h3>
-        <p>Nodes are placed at random and connected to whichever others sit within radio range — just like phones discovering each other over Bluetooth or Wi-Fi Direct.</p>
-      </div>
-      <div class="step">
-        <div class="step-num mono">02</div>
-        <h3>Every path is weighed</h3>
-        <p>Rather than taking the shortest route, the simulator compares every reasonable path and scores each one by the average reliability of the devices along it.</p>
-      </div>
-      <div class="step">
-        <div class="step-num mono">03</div>
-        <h3>The message hops through</h3>
-        <p>The most trustworthy path wins. The message travels hop by hop, slowing down slightly at weaker devices, until it reaches its destination.</p>
-      </div>
+  <!-- =========================================================
+       MATHEMATICS
+       ========================================================= -->
+  <div class="math-section">
+    <div class="math-intro">
+      <h2>The mathematics</h2>
+      <p class="math-title">Why the "best" route usually isn't the shortest one.</p>
+      <p class="math-dek">
+        Relay doesn't run Dijkstra and call it a day. Because it's optimizing an
+        <em>average</em> instead of a sum, the shortest-path assumption most routing
+        algorithms lean on quietly breaks — which is the actual reason the simulator
+        enumerates whole candidate routes instead of relaxing edges one at a time.
+        Here's the full derivation, worked example included.
+      </p>
+      <nav class="toc">
+        <a href="#sec1"><span class="n mono">§1</span>The graph</a>
+        <a href="#sec2"><span class="n mono">§2</span>The path space</a>
+        <a href="#sec3"><span class="n mono">§3</span>The objective</a>
+        <a href="#sec4"><span class="n mono">§4</span>Why it can't shortcut</a>
+        <a href="#sec5"><span class="n mono">§5</span>Delivery dynamics</a>
+      </nav>
     </div>
+
+    <!-- §1 — THE GRAPH -->
+    <section class="sub" id="sec1">
+      <div class="sub-head">
+        <span class="sub-num mono">§1</span>
+        <span class="sub-name">The graph</span>
+      </div>
+      <div class="split">
+        <div class="prose">
+          <p>
+            Each load scatters <strong>n = 9</strong> nodes at random positions and assigns
+            every node a <strong>reliability</strong> r(v) ∈ [0.30, 0.99] — a stand-in for
+            battery life, signal quality, whatever makes one phone a sturdier relay than
+            another.
+          </p>
+          <p>
+            Two nodes link up if they fall inside a fixed radio range ρ, exactly the way phones
+            discover each other over Bluetooth or Wi-Fi Direct. That's a
+            <strong>random geometric graph</strong>: proximity decides the edges, not any
+            central plan.
+          </p>
+          <div class="eq">
+            <span class="eq-label">Adjacency rule</span>
+            G = (V, E) &nbsp;·&nbsp; |V| = 9 &nbsp;·&nbsp; (u, v) ∈ E &nbsp;⇔&nbsp; dist(u, v) &lt; ρ
+          </div>
+          <p>
+            Random placement occasionally strands a cluster out of range of everything else.
+            Relay checks this with a <strong>union–find</strong> structure: every node starts
+            in its own set, each edge merges two sets, and if more than one set remains once
+            all in-range edges are added, the simulator bridges the closest pair of nodes
+            <em>across</em> the two nearest sets — repeating until union–find reports a single
+            component. It's one round of the same idea behind Borůvka's algorithm, just used
+            for connectivity instead of a minimum spanning tree.
+          </p>
+        </div>
+        <figure class="visual">
+          <svg viewBox="0 0 460 230" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="108" cy="46" r="46" fill="none" stroke="#8f8f8f" stroke-width="1" stroke-dasharray="3 3"/>
+            <text x="150" y="30" class="d-label mid">range ρ</text>
+            <line x1="66" y1="70" x2="108" y2="46" class="d-edge"/>
+            <line x1="66" y1="70" x2="86" y2="128" class="d-edge"/>
+            <line x1="108" y1="46" x2="150" y2="100" class="d-edge"/>
+            <line x1="86" y1="128" x2="150" y2="100" class="d-edge"/>
+            <line x1="330" y1="52" x2="382" y2="88" class="d-edge"/>
+            <line x1="382" y1="88" x2="352" y2="150" class="d-edge"/>
+            <line x1="382" y1="88" x2="408" y2="150" class="d-edge"/>
+            <line x1="352" y1="150" x2="408" y2="150" class="d-edge"/>
+            <line x1="150" y1="100" x2="330" y2="52" class="d-edge dashed mid"/>
+            <text x="200" y="68" class="d-label mid">bridge — closest pair across components</text>
+            <circle cx="66" cy="70" r="6" class="d-node"/>
+            <circle cx="108" cy="46" r="6" class="d-node"/>
+            <circle cx="86" cy="128" r="6" class="d-node"/>
+            <circle cx="150" cy="100" r="6" class="d-node"/>
+            <circle cx="330" cy="52" r="6" class="d-node"/>
+            <circle cx="382" cy="88" r="6" class="d-node"/>
+            <circle cx="352" cy="150" r="6" class="d-node"/>
+            <circle cx="408" cy="150" r="6" class="d-node"/>
+            <text x="30" y="200" class="d-label">component A</text>
+            <text x="340" y="200" class="d-label">component B</text>
+          </svg>
+          <figcaption>Two clusters form from proximity alone. Union–find detects they're
+          disconnected; the closest cross-cluster pair gets bridged so every node stays
+          reachable.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- §2 — THE PATH SPACE -->
+    <section class="sub" id="sec2">
+      <div class="sub-head">
+        <span class="sub-num mono">§2</span>
+        <span class="sub-name">The path space</span>
+      </div>
+      <div class="split rev">
+        <div class="prose">
+          <p>
+            Before anything can be scored, Relay needs every reasonable way to get from
+            source <strong>s</strong> to destination <strong>t</strong>. It enumerates
+            <strong>simple paths</strong> — no node repeats — with a depth-limited
+            depth-first search.
+          </p>
+          <div class="eq">
+            <span class="eq-label">Candidate routes</span>
+            Paths(s, t) = { (s=v₀, v₁, …, v_k=t) : vᵢ all distinct, (vᵢ, vᵢ₊₁) ∈ E, k ≤ 6 }
+          </div>
+          <p>
+            That depth cap isn't cosmetic. Counting simple paths in a general graph blows up
+            combinatorially — in the worst case, a fully-meshed set of 9 nodes gives the DFS up
+            to <strong>8 × 7 × 6 × 5 × 4 × 3 = 20,160</strong> candidate routes to consider from
+            a single source. Real mesh graphs are far sparser than that (geometry limits who's
+            even reachable), so in practice the search tree is tiny — but the cap is what
+            keeps the worst case bounded and the browser responsive.
+          </p>
+        </div>
+        <figure class="visual">
+          <svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="34" cy="110" r="7" class="d-node"/>
+            <text x="20" y="136" class="d-label">s</text>
+            <line x1="41" y1="104" x2="140" y2="46" class="d-edge"/>
+            <line x1="41" y1="116" x2="140" y2="174" class="d-edge"/>
+            <circle cx="140" cy="46" r="6" class="d-node"/>
+            <circle cx="140" cy="174" r="6" class="d-node"/>
+            <line x1="146" y1="40" x2="236" y2="20" class="d-edge dashed mid"/>
+            <circle cx="240" cy="18" r="5" class="d-node" fill="#dcdcdc" stroke="#8f8f8f"/>
+            <text x="252" y="22" class="d-label mid">✕ dead end</text>
+            <line x1="146" y1="52" x2="236" y2="82" class="d-edge"/>
+            <circle cx="240" cy="84" r="6" class="d-node"/>
+            <line x1="246" y1="82" x2="366" y2="106" class="d-edge win"/>
+            <line x1="146" y1="180" x2="236" y2="150" class="d-edge"/>
+            <circle cx="240" cy="150" r="6" class="d-node"/>
+            <line x1="246" y1="148" x2="366" y2="112" class="d-edge win"/>
+            <circle cx="372" cy="110" r="7" class="d-node win"/>
+            <text x="386" y="115" class="d-label win">t</text>
+            <text x="100" y="205" class="d-label mid">depth ≤ 6 — every branch is a distinct candidate path</text>
+          </svg>
+          <figcaption>The DFS tree from s: dead ends and revisits get pruned as they're found,
+          every s→t leaf becomes one entry in Paths(s, t).</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- §3 — THE OBJECTIVE -->
+    <section class="sub" id="sec3">
+      <div class="sub-head">
+        <span class="sub-num mono">§3</span>
+        <span class="sub-name">The objective</span>
+      </div>
+      <div class="split">
+        <div class="prose">
+          <p>
+            Every candidate path gets one number: the <strong>mean reliability</strong> of the
+            nodes it passes through, source and destination included.
+          </p>
+          <div class="eq">
+            <span class="eq-label">Score &amp; objective</span>
+            S(P) = Σ r(vᵢ) &nbsp;for i = 0…k<br>
+            R(P) = S(P) / (k + 1)<br>
+            P* = argmax<span style="font-size:11px">P ∈ Paths(s,t)</span> R(P) &nbsp;(ties → fewer hops)
+          </div>
+          <p>
+            Averaging instead of summing is the whole point: a raw sum rewards length for its
+            own sake, since almost any extra node with r &gt; 0 nudges the total up. Dividing by
+            hop count turns the score into <em>quality per hop</em> — a fair comparison between
+            a 2-hop route and a 5-hop one.
+          </p>
+        </div>
+        <figure class="visual">
+          <svg viewBox="0 0 460 210" xmlns="http://www.w3.org/2000/svg">
+            <line x1="40" y1="50" x2="180" y2="50" class="d-edge soft"/>
+            <line x1="180" y1="50" x2="400" y2="50" class="d-edge soft"/>
+            <circle cx="40" cy="50" r="6" class="d-node"/>
+            <circle cx="180" cy="50" r="6" class="d-node"/>
+            <circle cx="400" cy="50" r="6" class="d-node"/>
+            <text x="30" y="38" class="d-label">s · 0.81</text>
+            <text x="162" y="38" class="d-label">m · 0.42</text>
+            <text x="380" y="38" class="d-label">t · 0.93</text>
+            <text x="40" y="72" class="d-label mid">avg = 0.72</text>
+            <rect x="330" y="60" width="70" height="18" fill="none" stroke="#8f8f8f"/>
+            <text x="337" y="73" class="d-tag" fill="#8f8f8f">REJECTED</text>
+
+            <line x1="40" y1="150" x2="120" y2="150" class="d-edge"/>
+            <line x1="120" y1="150" x2="200" y2="150" class="d-edge"/>
+            <line x1="200" y1="150" x2="280" y2="150" class="d-edge"/>
+            <line x1="280" y1="150" x2="400" y2="150" class="d-edge"/>
+            <circle cx="40" cy="150" r="6" class="d-node"/>
+            <circle cx="120" cy="150" r="6" class="d-node"/>
+            <circle cx="200" cy="150" r="6" class="d-node"/>
+            <circle cx="280" cy="150" r="6" class="d-node"/>
+            <circle cx="400" cy="150" r="7" class="d-node win"/>
+            <text x="26" y="138" class="d-label">s · 0.81</text>
+            <text x="103" y="138" class="d-label">a · 0.88</text>
+            <text x="183" y="138" class="d-label">b · 0.95</text>
+            <text x="263" y="138" class="d-label">c · 0.91</text>
+            <text x="382" y="138" class="d-label">t · 0.93</text>
+            <text x="40" y="180" class="d-label win">avg = 0.896</text>
+            <rect x="330" y="163" width="70" height="18" fill="var(--black)"/>
+            <text x="337" y="176" class="d-tag" fill="#fff">CHOSEN</text>
+          </svg>
+          <figcaption>Same s, same t. The 4-hop route beats the 2-hop one on average reliability,
+          even though it's twice the length.</figcaption>
+        </figure>
+      </div>
+      <table class="worked">
+        <thead>
+          <tr><th>Route</th><th>Nodes (r)</th><th>Hops</th><th>Sum</th><th>Average</th><th></th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>s → m → t</td>
+            <td class="num">0.81, 0.42, 0.93</td>
+            <td class="num">2</td>
+            <td class="num">2.16</td>
+            <td class="num">0.720</td>
+            <td><span class="pill off">rejected</span></td>
+          </tr>
+          <tr class="win">
+            <td>s → a → b → c → t</td>
+            <td class="num">0.81, 0.88, 0.95, 0.91, 0.93</td>
+            <td class="num">4</td>
+            <td class="num">4.48</td>
+            <td class="num">0.896</td>
+            <td><span class="pill">chosen</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- §4 — WHY IT CAN'T SHORTCUT -->
+    <section class="sub" id="sec4">
+      <div class="sub-head">
+        <span class="sub-num mono">§4</span>
+        <span class="sub-name">Why it can't shortcut</span>
+      </div>
+      <div class="split rev">
+        <div class="prose">
+          <p>
+            Dijkstra and Bellman–Ford work because of <strong>optimal substructure</strong>:
+            the best path to t must pass through the best path to some earlier node w, so you
+            only ever need to remember the single best score seen at each node. Summed weights
+            guarantee that — a better partial sum, extended by the same suffix, always stays
+            better.
+          </p>
+          <p>
+            A <em>mean</em> doesn't guarantee that. Extending a path dilutes its average, and a
+            longer partial path dilutes less per extra node than a shorter one does. So a
+            partial route with a <em>worse</em> running average can end up beating one with a
+            <em>better</em> running average, once both are extended by the same tail.
+          </p>
+          <div class="eq">
+            <span class="eq-label">Counterexample</span>
+            partial α = (s, z): avg 0.950 &nbsp;·&nbsp; partial β = (s, p, q, r, z): avg 0.840<br>
+            common suffix: z → w(0.10) → t(0.90)<br>
+            final α = 0.725 &nbsp;·&nbsp; final β = <strong>0.743 ← wins</strong>
+          </div>
+          <p>
+            α looked strictly better at z. After the identical bad suffix, β wins anyway,
+            because those extra nodes made β's average harder to move. Keeping only "the best
+            partial score per node" — the trick that makes Dijkstra fast — would have thrown
+            β away before it ever got the chance.
+          </p>
+          <div class="aside">
+            <span class="aside-tag">Aside — why not Dijkstra with a trick?</span>
+            <p>
+              Maximizing a mean-weight path isn't hopeless in general: it's the same family as
+              the <strong>minimum mean cycle</strong> problem, and Karp's classic fix still
+              applies — guess a threshold λ, subtract it from every node's reliability, and
+              check whether any path's <em>shifted sum</em> is still positive using an ordinary
+              shortest/longest-path pass; binary-search λ until it converges on the true
+              optimum. It's real, and it's polynomial. Relay skips it because at 9 nodes and a
+              6-hop cap, brute-force enumeration is already cheaper than implementing a
+              parametric search.
+            </p>
+          </div>
+        </div>
+        <figure class="visual">
+          <svg viewBox="0 0 460 240" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="30" cy="55" r="6" class="d-node"/>
+            <text x="14" y="42" class="d-label">s</text>
+            <line x1="36" y1="58" x2="230" y2="118" class="d-edge"/>
+            <text x="70" y="80" class="d-label">α: avg 0.95</text>
+
+            <circle cx="30" cy="190" r="6" class="d-node"/>
+            <text x="14" y="210" class="d-label">s</text>
+            <line x1="36" y1="192" x2="90" y2="205" class="d-edge mid"/>
+            <circle cx="94" cy="207" r="5" class="d-node"/>
+            <line x1="99" y1="204" x2="150" y2="182" class="d-edge mid"/>
+            <circle cx="154" cy="180" r="5" class="d-node"/>
+            <line x1="159" y1="177" x2="200" y2="145" class="d-edge mid"/>
+            <circle cx="204" cy="142" r="5" class="d-node"/>
+            <line x1="209" y1="138" x2="230" y2="122" class="d-edge mid"/>
+            <text x="60" y="228" class="d-label mid">β: avg 0.84 (p, q, r)</text>
+
+            <circle cx="236" cy="118" r="7" class="d-node"/>
+            <text x="222" y="103" class="d-label">z</text>
+
+            <line x1="243" y1="116" x2="330" y2="116" class="d-edge dashed"/>
+            <circle cx="334" cy="116" r="6" class="d-node"/>
+            <text x="322" y="102" class="d-label">w · 0.10</text>
+            <line x1="340" y1="116" x2="400" y2="116" class="d-edge dashed"/>
+            <circle cx="404" cy="116" r="7" class="d-node win"/>
+            <text x="392" y="140" class="d-label">t</text>
+
+            <text x="330" y="70" class="d-label mid">final α = 0.725</text>
+            <text x="330" y="180" class="d-label win">final β = 0.743 ← wins</text>
+          </svg>
+          <figcaption>α is ahead at z. The same weak suffix (w = 0.10) drags both down —
+          but β, already diluted by three earlier nodes, barely moves. β overtakes.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- §5 — DELIVERY DYNAMICS -->
+    <section class="sub" id="sec5">
+      <div class="sub-head">
+        <span class="sub-num mono">§5</span>
+        <span class="sub-name">Delivery dynamics</span>
+      </div>
+      <div class="split">
+        <div class="prose">
+          <p>
+            Picking the path is only half the simulation. Once P* is chosen, the packet
+            animates hop by hop, and each hop's speed depends on the node it's arriving at —
+            weaker devices visibly slow the message down instead of just silently scoring
+            worse.
+          </p>
+          <div class="eq">
+            <span class="eq-label">Per-hop delay</span>
+            delay(v) = d₀ + k · (1 − r(v))
+          </div>
+          <p>
+            d₀ is a fixed base latency and k scales how much unreliability costs. A node at
+            r = 0.95 barely slows the packet; a node at r = 0.30 makes the hop visibly labor —
+            the same number that won or lost the route in §3 is what the eye actually sees
+            during send.
+          </p>
+        </div>
+        <figure class="visual">
+          <svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg">
+            <line x1="46" y1="20" x2="46" y2="168" class="d-edge soft"/>
+            <line x1="46" y1="168" x2="420" y2="168" class="d-edge soft"/>
+            <text x="10" y="24" class="d-label mid">delay</text>
+            <text x="370" y="188" class="d-label mid">reliability →</text>
+            <line x1="46" y1="34" x2="404" y2="150" class="d-edge win"/>
+            <line x1="100" y1="168" x2="100" y2="72" class="d-edge dashed mid"/>
+            <circle cx="100" cy="72" r="5" class="d-node win"/>
+            <text x="70" y="60" class="d-label">r = 0.40</text>
+            <line x1="360" y1="168" x2="360" y2="140" class="d-edge dashed mid"/>
+            <circle cx="360" cy="140" r="5" class="d-node win"/>
+            <text x="330" y="128" class="d-label">r = 0.95</text>
+          </svg>
+          <figcaption>Delay falls off linearly as reliability rises — a slow hop and a fast hop
+          are the same score, just felt instead of read.</figcaption>
+        </figure>
+      </div>
+    </section>
   </div>
 
   <footer>
     <span>No data leaves the page. Nothing is stored.</span>
-    <span class="mono">relay.html</span>
+    <span><a href="https://github.com/itsmilindsahu/RELAY" target="_blank" rel="noopener">Full source &amp; README on GitHub</a> · <span class="mono">relay.html</span></span>
   </footer>
 
 </div>
