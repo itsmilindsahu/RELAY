@@ -8,19 +8,19 @@ A tiny, single-file simulation of an offline **mesh messaging network** — the 
 
 **Landing page**
 
-![Relay landing page](media/screenshot_landing.png)
+![Relay landing page](screenshot_landing.png)
 
 The hero on the landing page isn't a static image — it's a live loop of the real routing logic, picking a random source and destination, finding the best path, and animating the hop:
 
-![Live routing preview loop](media/hero_routing.gif)
+![Live routing preview loop]hero_routing.gif)
 
 **The simulator**
 
-![Relay simulator idle state](media/screenshot_relay.png)
+![Relay simulator idle state](screenshot_relay.png)
 
 Sending a message: the packet hops node to node along the highest-reliability path, and the log records the route and delivery time.
 
-![Message routing through the mesh](media/relay_send_demo.gif)
+![Message routing through the mesh](relay_send_demo.gif)
 
 ## What it does
 
